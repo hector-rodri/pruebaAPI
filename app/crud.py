@@ -24,24 +24,23 @@ def create_tasks(db: Session, task: TaskCreate):
     # TODO: El vostre codi va aqui
     pass
 
+def update_task(db: Session, task_id: int, task_data: dict):
+    task = db.query(Task).filter(Task.id == task_id).first()
+    if not task:
+        return None  # Si no existe la tarea, devolvemos None
+    
+    for key, value in task_data.items():
+        setattr(task, key, value)  # Actualizamos los datos
+    
+    db.commit()
+    db.refresh(task)
+    return task
 
-def update_tasks(db: Session, task_id: int, task_update: TaskUpdate):
-    """
-    Input:
-        db: database session
-    Output:
-        Updated some task fields
-    """
-    # TODO: El vostre codi va aqui
-    pass
-
-
-def delete_tasks(db: Session, task_id: int):
-    """
-    Input:
-        db: database session
-    Output:
-        Return delete task
-    """
-    # TODO: El vostre codi va aqui
-    pass
+def delete_task(db: Session, task_id: int):
+    task = db.query(Task).filter(Task.id == task_id).first()
+    if not task:
+        return None  # Si no existe, no hacemos nada
+    
+    db.delete(task)
+    db.commit()
+    return task_id  # Devolvemos el ID de la tarea eliminada
