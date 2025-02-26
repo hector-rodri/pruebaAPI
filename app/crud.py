@@ -10,8 +10,7 @@ def get_tasks(db: Session):
     Output:
         List all tasks
     """
-    # TODO: El vostre codi va aqui
-    pass
+    return db.query(Task).all()
 
 
 def create_tasks(db: Session, task: TaskCreate):
