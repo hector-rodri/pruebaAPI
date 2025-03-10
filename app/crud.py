@@ -4,24 +4,17 @@ from schemas import TaskCreate, TaskUpdate
 
 
 def get_tasks(db: Session):
-    """
-    Input:
-        db: database session
-    Output:
-        List all tasks
-    """
+
     return db.query(Task).all()
 
 
 def create_tasks(db: Session, task: TaskCreate):
-    """
-    Input:
-        db: database session
-    Output:
-        Return the new task
-    """
-    # TODO: El vostre codi va aqui
-    pass
+    
+    db_task = Task(**task.dict())
+    db.add(db_task)
+    db.commit()
+    db.refresh(db_task)
+    return db_task
 
 
 def update_tasks(db: Session, task_id: int, task_update: TaskUpdate):
