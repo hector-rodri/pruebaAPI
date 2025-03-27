@@ -19,7 +19,7 @@ def create_tasks(db: Session, task: TaskCreate):
 def update_task(db: Session, task_id: int, task_data: dict):
     task = db.query(Task).filter(Task.id == task_id).first()
     if not task:
-        return None  # Si no existe la tarea, devolvemos None
+        return None  # Si no existe la tarea, devolvemos Nonea
     
     for key, value in task_data.items():
         setattr(task, key, value)  # Actualizamos los datos
