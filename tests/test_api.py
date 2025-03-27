@@ -3,6 +3,7 @@ from app.main import app
 
 client = TestClient(app)
 
+
 def test_create_task():
     # Crear una nueva tarea
     task_data = {"title": "Nueva tarea", "description": "Descripción de la nueva tarea"}
@@ -38,3 +39,4 @@ def test_get_tasks():
     titles = [task["title"] for task in tasks]
     assert "Tarea 1" in titles
     assert "Tarea 2" in titles
+
